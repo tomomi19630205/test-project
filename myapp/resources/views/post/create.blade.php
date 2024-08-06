@@ -4,27 +4,29 @@
             フォーム
         </h2>
     </x-slot>
-
     <div class="max-w-7xl mx-auto px-6">
-        <form>
+        @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
+        <form method="post" action="{{ route('post.store') }}" >
+            @csrf
             <div class="mt-8">
-                <div class="w-full flex flex-col">
+                <div class="w-full flex flex-col" >
                     <label for="title" class="font-semibold mt-4">件名</label>
-                    <input type="text" neme="title" class="w-auto py-2
-                    bordwr border-gray-300 rounded-md" id="title">
+                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    <input type="text" name="title" class="w-atuo py-2 border border-gray-300 rounded-md" id="title" value="{{old('title')}}">
                 </div>
             </div>
-            
             <div class="w-full flex flex-col">
                 <label for="body" class="font-semibold mt-4">本文</label>
-                <textarea name="body" class="w-auto py-2 border
-                border-gray-300 rounded-md" id="body" cols="30" row="5">
-                </textarea>
+                <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="5">{{old('body')}}</textarea >
             </div>
-
             <x-primary-button class="mt-4">
                 送信する
-            </x-primary-botton>
+            </x-primary-button>
         </form>
     </div>
-</x-spp-layout>
+</x-app-layout>
