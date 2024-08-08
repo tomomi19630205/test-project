@@ -13,7 +13,8 @@ class PostController extends Controller
     public function index()
     {
         //$posts=Post::where('user_id', auth()->id())->get();
-        $posts=Post::all();
+        //$posts=Post::all();
+        $posts=Post::paginate(10);
         return view('post.index', compact('posts'));
     }
 
